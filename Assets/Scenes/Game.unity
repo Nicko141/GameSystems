@@ -3158,7 +3158,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1428126956}
   - component: {fileID: 1428126958}
-  - component: {fileID: 1428126957}
   m_Layer: 8
   m_Name: Minimap
   m_TagString: Untagged
@@ -3180,14 +3179,6 @@ Transform:
   m_Father: {fileID: 432300482}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!81 &1428126957
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428126955}
-  m_Enabled: 1
 --- !u!20 &1428126958
 Camera:
   m_ObjectHideFlags: 0
@@ -4052,7 +4043,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1603191854}
   - component: {fileID: 1603191856}
-  - component: {fileID: 1603191855}
   m_Layer: 8
   m_Name: icon
   m_TagString: Untagged
@@ -4074,14 +4064,6 @@ Transform:
   m_Father: {fileID: 432300482}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!81 &1603191855
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1603191853}
-  m_Enabled: 1
 --- !u!20 &1603191856
 Camera:
   m_ObjectHideFlags: 0
