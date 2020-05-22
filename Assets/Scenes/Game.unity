@@ -756,6 +756,7 @@ GameObject:
   - component: {fileID: 432300483}
   - component: {fileID: 432300486}
   - component: {fileID: 432300487}
+  - component: {fileID: 432300488}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1053,6 +1054,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f832a955d017a104d933cb15c38e312d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &432300488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432300478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe07cf7dd270ae4db7905c78cca7419, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scr: {x: 0, y: 0}
+  scrollPos: {x: 0, y: 0}
+  dropLocation: {fileID: 0}
+  equipmentSlots:
+  - slotName: Head
+    equipLocation: {fileID: 523353849398081201}
+    currentItem: {fileID: 0}
+  - slotName: Left Hand
+    equipLocation: {fileID: 2256069296922355545}
+    currentItem: {fileID: 0}
+  - slotName: Right Hand
+    equipLocation: {fileID: 2407810478383660108}
+    currentItem: {fileID: 0}
+  - slotName: Back
+    equipLocation: {fileID: 4066578797474977384}
+    currentItem: {fileID: 0}
 --- !u!1 &445310503
 GameObject:
   m_ObjectHideFlags: 0

@@ -94,7 +94,7 @@ public static class ItemData
                 break;
             case 203:
                 _name = "Gloves";
-                _description = "Well, aren't we fancy?";
+                _description = "Well aren't we fancy?";
                 _value = 35;
                 _amount = 1;
                 _icon = "Apparel/Armour/gloves";
@@ -128,18 +128,96 @@ public static class ItemData
                 _mesh = "Apparel/Armour/shoulders";
                 _type = ItemType.Apparel;
                 break;
+            case 207:
+                _name = "Belt";
+                _description = "Combine with Pants for Sucess";
+                _value = 50;
+                _amount = 1;
+                _icon = "Apparel/belts";
+                _mesh = "Apparel/belts";
+                _type = ItemType.Apparel;
+                break;
+            case 208:
+                _name = "Cloak";
+                _description = "Where the dagger?";
+                _value = 50;
+                _amount = 1;
+                _icon = "Apparel/cloaks";
+                _mesh = "Apparel/cloaks";
+                _type = ItemType.Apparel;
+                break;
+            case 209:
+                _name = "Necklace";
+                _description = "";
+                _value = 50;
+                _amount = 1;
+                _icon = "Apparel/necklace";
+                _mesh = "Apparel/necklace";
+                _type = ItemType.Apparel;
+                break;
             #endregion
             #region Crafting 300 - 399
-
+            case 300:
+                _name = "Gem";
+                _description = "AXE is AXE";
+                _value = 75;
+                _amount = 1;
+                _icon = "Crafting/gem";
+                _mesh = "Crafting/gem";
+                _type = ItemType.Crafting;
+                break;
+            case 301:
+                _name = "Ingot";
+                _description = "AXE is AXE";
+                _value = 75;
+                _amount = 1;
+                _icon = "Crafting/ingots";
+                _mesh = "Crafting/ingots";
+                _type = ItemType.Crafting;
+                break;
             #endregion
             #region Ingredients 400 - 499
 
             #endregion
             #region Potions 500 - 599
-
+            case 500:
+                _name = "Health Potion";
+                _description = "";
+                _value = 75;
+                _amount = 1;
+                _icon = "";
+                _mesh = "";
+                _type = ItemType.Potion;
+                break;
+            case 501:
+                _name = "Mana Potion";
+                _description = "";
+                _value = 75;
+                _amount = 1;
+                _icon = "";
+                _mesh = "";
+                _type = ItemType.Potion;
+                break;
             #endregion
             #region Scrolls 600 - 699
-
+            case 600:
+                _name = "Scroll";
+                _description = "AXE is AXE";
+                _value = 75;
+                _amount = 1;
+                _icon = "Apparel/Armour/armour";
+                _mesh = "Apparel/Armour/armour";
+                _type = ItemType.Scrolls;
+                break;
+            case 601:
+                _name = "Book";
+                _description = "Check for worms";
+                _value = 75;
+                _amount = 1;
+                _icon = "Apparel/Armour/armour";
+                _mesh = "Apparel/Armour/armour";
+                _type = ItemType.Scrolls;
+                break;
             #endregion
             #region Quest 700 - 799
 
