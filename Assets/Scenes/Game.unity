@@ -888,8 +888,8 @@ MonoBehaviour:
     tempValue: 0
   name: 
   speed: 5
-  crouch: 2
-  sprint: 7
+  crouch: 0.5
+  sprint: 2
   jumpspeed: 8
   gravity: 20
   controller: {fileID: 0}
@@ -4862,6 +4862,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113c0ebbd1e26e64c9344d653703882d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  characterMesh: {fileID: 0}
 --- !u!4 &3383061500864095247
 Transform:
   m_ObjectHideFlags: 0
