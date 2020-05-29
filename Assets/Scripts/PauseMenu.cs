@@ -27,7 +27,11 @@ public class PauseMenu : MonoBehaviour
         //unpause everything
         isPaused = false;
         //start time
-        Time.timeScale = 1;
+        if (!LinearInventory.showInv)
+        {
+            Time.timeScale = 1;
+        }
+        
         //close pause menu
         pauseMenu.SetActive(false);
         //lock the Kraken!! (cursor)

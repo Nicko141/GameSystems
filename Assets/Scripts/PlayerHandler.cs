@@ -137,10 +137,10 @@ public class PlayerHandler : Character
         {
             regenHealth();
         }
-        if (attributes[0].currentValue > attributes[0].maxValue)
+        /*if (attributes[0].currentValue > attributes[0].maxValue)
         {
             attributes[0].currentValue = attributes[0].maxValue;
-        }
+        }*/
     }
 
     public void damagePlayer(float damage)

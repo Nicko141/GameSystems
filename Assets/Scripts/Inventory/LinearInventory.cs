@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LinearInventory : MonoBehaviour
@@ -59,9 +60,13 @@ public class LinearInventory : MonoBehaviour
             }
             else
             {
-                Time.timeScale = 1;
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                if (!PauseMenu.isPaused)
+                {
+                    Time.timeScale = 1;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                }
+                
                 return;
             }
         }
@@ -190,7 +195,7 @@ public class LinearInventory : MonoBehaviour
                 {
                     if (GUI.Button(new Rect(6f * scr.x, 3.25f * scr.y, scr.x, 0.25f * scr.y), "Eat"))
                     {
-                        player.attributes[0].currentValue += selectedItem.Heal;
+                        player.attributes[0].currentValue = Mathf.Clamp(player.attributes[0].currentValue += selectedItem.Heal,0, player.attributes[0].maxValue);
 
                         if (selectedItem.Amount > 1)
                         {
@@ -207,9 +212,25 @@ public class LinearInventory : MonoBehaviour
                 
                 break;
             case ItemType.Weapon:
-                if (GUI.Button(new Rect(6f * scr.x, 3.25f * scr.y, scr.x, 0.25f * scr.y),"Equip"))
+                if (equipmentSlots[2].currentItem == null || selectedItem.Name != equipmentSlots[2].currentItem.name)
                 {
-
+                    if (GUI.Button(new Rect(6f * scr.x, 3.25f * scr.y, scr.x, 0.25f * scr.y), "Equip"))
+                    {
+                        if (equipmentSlots[2].currentItem != null)
+                        {
+                            Destroy(equipmentSlots[2].currentItem);
+                        }
+                        GameObject curItem = Instantiate(selectedItem.Mesh, equipmentSlots[2].equipLocation);
+                        equipmentSlots[2].currentItem = curItem;
+                        curItem.name = selectedItem.Name;
+                    }
+                }
+                else
+                {
+                    if (GUI.Button(new Rect(6f * scr.x, 3.25f * scr.y, scr.x, 0.25f * scr.y), "Unequip"))
+                    {
+                        Destroy(equipmentSlots[2].currentItem);
+                    }
                 }
                 break;
             case ItemType.Potion:
@@ -250,6 +271,32 @@ public class LinearInventory : MonoBehaviour
                 break;
         }
         GUI.skin = null;//end of skin range
+
+        if (GUI.Button(new Rect(5f * scr.x, 3.25f * scr.y, scr.x, 0.25f * scr.y), "Discard"))
+        {
+            for (int i = 0; i < equipmentSlots.Length; i++)
+            {
+                if (equipmentSlots[i].currentItem != null && selectedItem.Name == equipmentSlots[i].currentItem.name)
+                {
+                    Destroy(equipmentSlots[i].currentItem);
+                }
+            }
+            //spawn in world
+            GameObject droppedItem = Instantiate(selectedItem.Mesh, dropLocation.position, Quaternion.identity);
+            droppedItem.name = selectedItem.Name;
+            droppedItem.AddComponent<Rigidbody>().useGravity = true;
+            droppedItem.GetComponent<ItemHandler>().enabled = true;
+            if (selectedItem.Amount > 1)
+            {
+                selectedItem.Amount--;
+            }
+            else
+            {
+                inv.Remove(selectedItem);
+                selectedItem = null;
+                return;
+            }
+        }
     }
     private void OnGUI()
     {
