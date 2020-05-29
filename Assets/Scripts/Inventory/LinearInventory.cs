@@ -6,6 +6,8 @@ public class LinearInventory : MonoBehaviour
     public static List<Item> inv = new List<Item>();
     public Item selectedItem;
     public static bool showInv;
+    public GUIStyle style;
+    public GUISkin skin;
 
     public Vector2 scr;
     public Vector2 scrollPos;
@@ -73,7 +75,15 @@ public class LinearInventory : MonoBehaviour
     }
     void UseItem()
     {
+        
         GUI.Box(new Rect(5f * scr.x, 0.5f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Icon);
+        GUI.Box(new Rect(8f * scr.x, 1f * scr.y, 5 * scr.x, 0.5f * scr.y), selectedItem.Name, style);//style adds to one
+        GUI.skin = skin; //skin adds to all within range
+        GUI.Box(new Rect(8f * scr.x, 1.5f * scr.y, 5 * scr.x, 0.5f * scr.y), selectedItem.Description);
+        GUI.Box(new Rect(8f * scr.x, 2f * scr.y, 5 * scr.x, 0.5f * scr.y), "Value " + selectedItem.Value);
+        GUI.Box(new Rect(8f * scr.x, 2.5f * scr.y, 5 * scr.x, 0.5f * scr.y), "Amount " + selectedItem.Amount);
+
+        
         switch (selectedItem.Type)
         {
             case ItemType.Food:
@@ -125,6 +135,7 @@ public class LinearInventory : MonoBehaviour
             default:
                 break;
         }
+        GUI.skin = null;//end of skin range
     }
     private void OnGUI()
     {
