@@ -11,7 +11,7 @@ public class LinearInventory : MonoBehaviour
 
     public Vector2 scr;
     public Vector2 scrollPos;
-
+    public string sortType = "";
     public static int money;
 
     public Transform dropLocation;
@@ -60,17 +60,93 @@ public class LinearInventory : MonoBehaviour
                 return;
             }
         }
+        #if UNITY_EDITOR
+        if (Input.GetKey(KeyCode.I))
+        {
+            inv.Add(ItemData.CreateItem(Random.Range(0, 3)));
+            inv.Add(ItemData.CreateItem(Random.Range(100, 103)));
+            inv.Add(ItemData.CreateItem(Random.Range(200, 203)));
+        }
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            sortType = "Food";
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            sortType = "All";
+        }
+#endif
     }
     void Display()
     {
-        for (int i = 0; i < inv.Count; i++)
+        //want to display everything in inventory
+        if (sortType == "All" || sortType == "")
         {
-            if (GUI.Button(new Rect(0.5f*scr.x,0.25f*scr.y + i * (0.25f * scr.y),3*scr.x,0.25f*scr.y), inv[i].Name))
+            //34 or less
+            if (inv.Count <= 34)
             {
-                selectedItem = inv[i];
+                for (int i = 0; i < inv.Count; i++)
+                {
+                    if (GUI.Button(new Rect(0.5f * scr.x, 0.25f * scr.y + i * (0.25f * scr.y), 3 * scr.x, 0.25f * scr.y), inv[i].Name))
+                    {
+                        selectedItem = inv[i];
+                    }
+
+
+                }
             }
-            
-            
+            //more than 34 items
+            else
+            {
+                scrollPos = GUI.BeginScrollView(new Rect(0f, 0.25f*scr.y,3.75f * scr.x,8.5f*scr.y), scrollPos, new Rect(0,0,0,/*8.5f*scr.y+(inv.Count-34))or*/ inv.Count* 0.25f* scr.y), false, true);
+
+                #region EVERYTHIGN DISPLAYED INSIDE SCROLL VIEW
+                for (int i = 0; i < inv.Count; i++)
+                {
+                    if (GUI.Button(new Rect(0.5f * scr.x, i * (0.25f * scr.y), 3 * scr.x, 0.25f * scr.y), inv[i].Name))
+                    {
+                        selectedItem = inv[i];
+                    }
+                }
+                #endregion
+
+                GUI.EndScrollView();
+            }
+        }
+        //display based on type
+        else
+        {
+            ItemType type = (ItemType)System.Enum.Parse(typeof(ItemType), sortType);
+            //amount in type
+            int a = 0;
+            //slot position
+            int s = 0;
+            for (int i = 0; i < inv.Count; i++)
+            {
+                if (inv[i].Type == type)
+                {
+                    a++;
+                }
+            }
+            if (a<=34)//less than 34 of this type
+            {
+                for (int i = 0; i < inv.Count; i++)
+                {
+                    if (inv[i].Type == type)
+                    {
+                        if (GUI.Button(new Rect(0.5f * scr.x, 0.25f * scr.y + i * (0.25f * scr.y), 3 * scr.x, 0.25f * scr.y), inv[i].Name))
+                        {
+                            selectedItem = inv[i];
+                            s = i + 1;
+                        }
+                    }
+                    
+                }
+            }
+            else//more than 34 of this type
+            {
+
+            }
         }
     }
     void UseItem()
