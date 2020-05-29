@@ -137,6 +137,10 @@ public class PlayerHandler : Character
         {
             regenHealth();
         }
+        if (attributes[0].currentValue > attributes[0].maxValue)
+        {
+            attributes[0].currentValue = attributes[0].maxValue;
+        }
     }
 
     public void damagePlayer(float damage)
@@ -156,6 +160,7 @@ public class PlayerHandler : Character
     public void regenHealth()
     {
         attributes[0].currentValue += Time.deltaTime *(attributes[0].regenValue/*plus our vitality value*/);
+        
     }
     public void OnTriggerEnter(Collider other)
     {

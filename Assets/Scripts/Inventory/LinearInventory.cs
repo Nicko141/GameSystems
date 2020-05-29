@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class LinearInventory : MonoBehaviour
 {
+    public PlayerHandler player;
     public static List<Item> inv = new List<Item>();
     public Item selectedItem;
     public static bool showInv;
@@ -26,6 +27,7 @@ public class LinearInventory : MonoBehaviour
     public Equipment[] equipmentSlots;
     void Start()
     {
+        player = this.gameObject.GetComponent<PlayerHandler>();
         enumTypesForItems = new string[] { "All", "Food", "Weapon", "Apparel", "Crafting", "Ingredients", "Potion", "Scrolls", "Quest" };
 
         inv.Add(ItemData.CreateItem(0));
@@ -184,10 +186,25 @@ public class LinearInventory : MonoBehaviour
         switch (selectedItem.Type)
         {
             case ItemType.Food:
-                if (GUI.Button(new Rect(6f * scr.x, 3.25f * scr.y, scr.x, 0.25f * scr.y), "Eat"))
+                if (player.attributes[0].currentValue < player.attributes[0].maxValue)
                 {
+                    if (GUI.Button(new Rect(6f * scr.x, 3.25f * scr.y, scr.x, 0.25f * scr.y), "Eat"))
+                    {
+                        player.attributes[0].currentValue += selectedItem.Heal;
 
+                        if (selectedItem.Amount > 1)
+                        {
+                            selectedItem.Amount--;
+                        }
+                        else
+                        {
+                            inv.Remove(selectedItem);
+                            selectedItem = null;
+                            return;
+                        }
+                    }
                 }
+                
                 break;
             case ItemType.Weapon:
                 if (GUI.Button(new Rect(6f * scr.x, 3.25f * scr.y, scr.x, 0.25f * scr.y),"Equip"))

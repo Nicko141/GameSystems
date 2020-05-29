@@ -12,6 +12,9 @@ public static class ItemData
         int _amount = 0;
         string _icon = "";
         string _mesh = "";
+        int _heal = 0;
+        int _damage = 0;
+        int _armour = 0;
         ItemType _type = ItemType.Apparel;
         switch (itemID)
         {
@@ -24,6 +27,7 @@ public static class ItemData
                 _icon = "Food/apple";
                 _mesh = "Food/apple";
                 _type = ItemType.Food;
+                _heal = 10;
                 break;
             case 1:
                 _name = "Meat";
@@ -33,6 +37,7 @@ public static class ItemData
                 _icon = "Food/Meat";
                 _mesh = "Food/Meat";
                 _type = ItemType.Food;
+                _heal = 25;
                 break;
             #endregion
             #region Weapon 100 - 199
@@ -241,6 +246,9 @@ public static class ItemData
             Description = _description,
             Value = _value,
             Amount = _amount,
+            Heal = _heal,
+            Damage = _damage,
+            Armour = _armour,
             Type = _type,
             Icon = Resources.Load("Icons/"+_icon)as Texture2D,
             Mesh = Resources.Load("Mesh/"+_mesh) as GameObject

@@ -8,6 +8,9 @@ public class Item
     private string _description;
     private int _value;
     private int _amount;
+    private int _heal;
+    private int _damage;
+    private int _armour;
     private Texture2D _icon;
     private GameObject _mesh;
     private ItemType _type;
@@ -38,6 +41,21 @@ public class Item
     {
         get { return _amount; }
         set { _amount = value; }
+    }
+    public int Heal
+    {
+        get { return _heal; }
+        set { _heal = value; }
+    }
+    public int Damage
+    {
+        get { return _damage; }
+        set { _damage = value; }
+    }
+    public int Armour
+    {
+        get { return _armour; }
+        set { _armour = value; }
     }
     public Texture2D Icon
     {
