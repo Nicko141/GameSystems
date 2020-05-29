@@ -126,6 +126,7 @@ public class LinearInventory : MonoBehaviour
                 if (inv[i].Type == type)
                 {
                     a++;
+                    
                 }
             }
             if (a<=34)//less than 34 of this type
@@ -133,19 +134,36 @@ public class LinearInventory : MonoBehaviour
                 for (int i = 0; i < inv.Count; i++)
                 {
                     if (inv[i].Type == type)
-                    {
-                        if (GUI.Button(new Rect(0.5f * scr.x, 0.25f * scr.y + i * (0.25f * scr.y), 3 * scr.x, 0.25f * scr.y), inv[i].Name))
+                    {   
+                        if (GUI.Button(new Rect(0.5f * scr.x, 0.25f * scr.y + s * (0.25f * scr.y), 3 * scr.x, 0.25f * scr.y), inv[i].Name))
                         {
                             selectedItem = inv[i];
-                            s = i + 1;
                         }
+                        s++;
                     }
                     
                 }
             }
             else//more than 34 of this type
             {
+                scrollPos = GUI.BeginScrollView(new Rect(0f, 0.25f * scr.y, 3.75f * scr.x, 8.5f * scr.y), scrollPos, new Rect(0, 0, 0, a * 0.25f * scr.y), false, true);
 
+                #region EVERYTHIGN DISPLAYED INSIDE SCROLL VIEW
+                for (int i = 0; i < inv.Count; i++)
+                {
+                    if (inv[i].Type == type)
+                    {
+                        if (GUI.Button(new Rect(0.5f * scr.x, s * (0.25f * scr.y), 3 * scr.x, 0.25f * scr.y), inv[i].Name))
+                        {
+                            selectedItem = inv[i];
+                        }
+                        s++;
+                    }
+                    
+                }
+                #endregion
+
+                GUI.EndScrollView();
             }
         }
     }
