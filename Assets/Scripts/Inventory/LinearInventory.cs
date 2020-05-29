@@ -12,6 +12,7 @@ public class LinearInventory : MonoBehaviour
     public Vector2 scr;
     public Vector2 scrollPos;
     public string sortType = "";
+    public string[] enumTypesForItems;
     public static int money;
 
     public Transform dropLocation;
@@ -25,6 +26,8 @@ public class LinearInventory : MonoBehaviour
     public Equipment[] equipmentSlots;
     void Start()
     {
+        enumTypesForItems = new string[] { "All", "Food", "Weapon", "Apparel", "Crafting", "Ingredients", "Potion", "Scrolls", "Quest" };
+
         inv.Add(ItemData.CreateItem(0));
         inv.Add(ItemData.CreateItem(1));
         inv.Add(ItemData.CreateItem(50));// broken test
@@ -173,9 +176,9 @@ public class LinearInventory : MonoBehaviour
         GUI.Box(new Rect(5f * scr.x, 0.5f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Icon);
         GUI.Box(new Rect(8f * scr.x, 1f * scr.y, 5 * scr.x, 0.5f * scr.y), selectedItem.Name, style);//style adds to one
         GUI.skin = skin; //skin adds to all within range
-        GUI.Box(new Rect(8f * scr.x, 1.5f * scr.y, 5 * scr.x, 0.5f * scr.y), selectedItem.Description);
-        GUI.Box(new Rect(8f * scr.x, 2f * scr.y, 5 * scr.x, 0.5f * scr.y), "Value " + selectedItem.Value);
-        GUI.Box(new Rect(8f * scr.x, 2.5f * scr.y, 5 * scr.x, 0.5f * scr.y), "Amount " + selectedItem.Amount);
+        GUI.Box(new Rect(8f * scr.x, 1.5f * scr.y, 5 * scr.x, 1f * scr.y), selectedItem.Description + "\nValue " + selectedItem.Value + "\nAmount " + selectedItem.Amount);
+        //GUI.Box(new Rect(8f * scr.x, 2f * scr.y, 5 * scr.x, 0.5f * scr.y), "Value " + selectedItem.Value);
+        //GUI.Box(new Rect(8f * scr.x, 2.5f * scr.y, 5 * scr.x, 0.5f * scr.y), "Amount " + selectedItem.Amount);
 
         
         switch (selectedItem.Type)
@@ -236,6 +239,13 @@ public class LinearInventory : MonoBehaviour
         if (showInv)
         {
             GUI.Box(new Rect(0, 0, Screen.width, Screen.height), "");
+            for (int i = 0; i < enumTypesForItems.Length; i++)
+            {
+                if (GUI.Button(new Rect(4f*scr.x + i * scr.x, 0, scr.x, 0.25f *scr.y),enumTypesForItems[i]))
+                {
+                    sortType = enumTypesForItems[i];
+                }
+            }
             Display();
             if (selectedItem !=null)
             {
