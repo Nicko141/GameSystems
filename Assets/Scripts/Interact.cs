@@ -76,7 +76,25 @@ public class Interact : MonoBehaviour
                         handler.OnCollection();
                     }
                 }
-                             
+
+                #endregion
+                #region Chest
+                if (hitInfo.collider.CompareTag("Chest"))
+                {
+                    Chest chest = hitInfo.transform.GetComponent<Chest>();
+                    if (chest != null)
+                    {
+                        
+                        chest.showChestInv = true;
+                        LinearInventory.showInv = true;
+                        
+                        Time.timeScale = 0;
+                        Cursor.lockState = CursorLockMode.None;
+                        Cursor.visible = true;
+                        LinearInventory.currentChest = chest;
+                        
+                    }
+                }
                 #endregion
             }
         }

@@ -26,12 +26,15 @@ public class LinearInventory : MonoBehaviour
         public GameObject currentItem;
     };
     public Equipment[] equipmentSlots;
+
+    public static Chest currentChest;
+    public static Shop currentShop;
     void Start()
     {
         player = this.gameObject.GetComponent<PlayerHandler>();
         enumTypesForItems = new string[] { "All", "Food", "Weapon", "Apparel", "Crafting", "Ingredients", "Potion", "Scrolls", "Quest" };
 
-        /*inv.Add(ItemData.CreateItem(0));
+        inv.Add(ItemData.CreateItem(0));
         inv.Add(ItemData.CreateItem(1));
         inv.Add(ItemData.CreateItem(50));// broken test
         inv.Add(ItemData.CreateItem(100));
@@ -39,7 +42,7 @@ public class LinearInventory : MonoBehaviour
         inv.Add(ItemData.CreateItem(102));
         inv.Add(ItemData.CreateItem(200));
         inv.Add(ItemData.CreateItem(201));
-        inv.Add(ItemData.CreateItem(202));*/
+        inv.Add(ItemData.CreateItem(202));
     }
 
     // Update is called once per frame
@@ -47,29 +50,40 @@ public class LinearInventory : MonoBehaviour
     {
         scr.x = Screen.width / 16;
         scr.y = Screen.height / 9;
-
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (currentShop == null)
         {
-            showInv = !showInv;
-            if (showInv)
+            if (Input.GetKeyDown(KeyCode.Tab))
             {
-                Time.timeScale = 0;
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                return;
-            }
-            else
-            {
-                if (!PauseMenu.isPaused)
+                showInv = !showInv;
+                if (showInv)
                 {
-                    Time.timeScale = 1;
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
+                    Time.timeScale = 0;
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
+                    return;
                 }
-                
-                return;
+                else
+                {
+                    if (!PauseMenu.isPaused)
+                    {
+                        Time.timeScale = 1;
+                        Cursor.lockState = CursorLockMode.Locked;
+                        Cursor.visible = false;
+                        if (currentChest != null)
+                        {
+                            currentChest.showChestInv = false;
+                            currentChest = null;
+                        }
+
+
+
+                    }
+
+                    return;
+                }
             }
         }
+        
         #if UNITY_EDITOR
         if (Input.GetKey(KeyCode.I))
         {
@@ -297,6 +311,60 @@ public class LinearInventory : MonoBehaviour
                 return;
             }
         }
+        if (currentChest != null)
+        {
+            if (GUI.Button(new Rect(7f * scr.x, 3.25f * scr.y, scr.x, 0.25f * scr.y), "Store"))
+            {
+                for (int i = 0; i < equipmentSlots.Length; i++)
+                {
+                    if (equipmentSlots[i].currentItem != null && selectedItem.Name == equipmentSlots[i].currentItem.name)
+                    {
+                        Destroy(equipmentSlots[i].currentItem);
+                    }
+                }
+                //spawn in world
+                currentChest.chestInv.Add(selectedItem);
+
+                if (selectedItem.Amount > 1)
+                {
+                    selectedItem.Amount--;
+                }
+                else
+                {
+                    inv.Remove(selectedItem);
+                    selectedItem = null;
+                    return;
+                }
+            }
+        }
+        if (currentShop != null)
+        {
+            if (GUI.Button(new Rect(7f * scr.x, 3.25f * scr.y, scr.x, 0.25f * scr.y), "Sell"))
+            {
+                for (int i = 0; i < equipmentSlots.Length; i++)
+                {
+                    if (equipmentSlots[i].currentItem != null && selectedItem.Name == equipmentSlots[i].currentItem.name)
+                    {
+                        Destroy(equipmentSlots[i].currentItem);
+                    }
+                }
+                //spawn in world
+                money += selectedItem.Value;
+                currentShop.shopInv.Add(selectedItem);
+
+                if (selectedItem.Amount > 1)
+                {
+                    selectedItem.Amount--;
+                }
+                else
+                {
+                    inv.Remove(selectedItem);
+                    selectedItem = null;
+                    return;
+                }
+            }
+        }
+
     }
     private void OnGUI()
     {

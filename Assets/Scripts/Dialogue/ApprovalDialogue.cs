@@ -25,6 +25,8 @@ public class ApprovalDialogue : MonoBehaviour
     public int approval;
     public string response1, response2;
 
+    public Shop myShop;
+
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -110,6 +112,13 @@ public class ApprovalDialogue : MonoBehaviour
                 }
             }
 
+            if (GUI.Button(new Rect(12*scr.x,8.5f*scr.y,scr.x,0.5f*scr.y), "Shop"))
+            {
+                myShop.showShopInv = true;
+                LinearInventory.showInv = true;
+                LinearInventory.currentShop = myShop;
+                showDlg = false;
+            }
         }
     }
     // Update is called once per frame

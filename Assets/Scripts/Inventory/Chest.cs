@@ -8,6 +8,7 @@ public class Chest : MonoBehaviour
     public Item selectedItem;
     public bool showChestInv;
     public Vector2 scr;
+    
 
     private void Start()
     {
@@ -40,9 +41,11 @@ public class Chest : MonoBehaviour
                 {
                     //add to player
                     LinearInventory.inv.Add(ItemData.CreateItem(selectedItem.ID));
+                    
                     //remove from chest
                     chestInv.Remove(selectedItem);
                     selectedItem = null;
+
                     return;
                 }
             }
