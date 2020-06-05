@@ -31,7 +31,7 @@ public class LinearInventory : MonoBehaviour
         player = this.gameObject.GetComponent<PlayerHandler>();
         enumTypesForItems = new string[] { "All", "Food", "Weapon", "Apparel", "Crafting", "Ingredients", "Potion", "Scrolls", "Quest" };
 
-        inv.Add(ItemData.CreateItem(0));
+        /*inv.Add(ItemData.CreateItem(0));
         inv.Add(ItemData.CreateItem(1));
         inv.Add(ItemData.CreateItem(50));// broken test
         inv.Add(ItemData.CreateItem(100));
@@ -39,7 +39,7 @@ public class LinearInventory : MonoBehaviour
         inv.Add(ItemData.CreateItem(102));
         inv.Add(ItemData.CreateItem(200));
         inv.Add(ItemData.CreateItem(201));
-        inv.Add(ItemData.CreateItem(202));
+        inv.Add(ItemData.CreateItem(202));*/
     }
 
     // Update is called once per frame
