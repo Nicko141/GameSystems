@@ -181,9 +181,9 @@ public class LinearInventory : MonoBehaviour
     {
         
         GUI.Box(new Rect(5f * scr.x, 0.5f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Icon);
-        GUI.Box(new Rect(8f * scr.x, 1f * scr.y, 5 * scr.x, 0.5f * scr.y), selectedItem.Name, style);//style adds to one
+        GUI.Box(new Rect(5f * scr.x, 3.5f * scr.y, 3 * scr.x, 0.5f * scr.y), selectedItem.Name, style);//style adds to one
         GUI.skin = skin; //skin adds to all within range
-        GUI.Box(new Rect(8f * scr.x, 1.5f * scr.y, 5 * scr.x, 1f * scr.y), selectedItem.Description + "\nValue " + selectedItem.Value + "\nAmount " + selectedItem.Amount);
+        GUI.Box(new Rect(5f * scr.x, 4f * scr.y, 3 * scr.x, 1f * scr.y), selectedItem.Description + "\nValue " + selectedItem.Value + "\nAmount " + selectedItem.Amount);
         //GUI.Box(new Rect(8f * scr.x, 2f * scr.y, 5 * scr.x, 0.5f * scr.y), "Value " + selectedItem.Value);
         //GUI.Box(new Rect(8f * scr.x, 2.5f * scr.y, 5 * scr.x, 0.5f * scr.y), "Amount " + selectedItem.Amount);
 

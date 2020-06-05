@@ -27,7 +27,23 @@ public class Chest : MonoBehaviour
             {
                 if (GUI.Button(new Rect(12.5f * scr.x, 0.25f * scr.y + i * (0.25f * scr.y), 3 * scr.x, 0.25f * scr.y),chestInv[i].Name))
                 {
+                    selectedItem = chestInv[i];
+                }
+            }
+            if (selectedItem != null)
+            {
+                GUI.Box(new Rect(9f * scr.x, 0.5f * scr.y, 3 * scr.x, 3 * scr.y), selectedItem.Icon);
+                GUI.Box(new Rect(9f * scr.x, 3.5f * scr.y, 3 * scr.x, 0.5f * scr.y), selectedItem.Name);
+                GUI.Box(new Rect(9f * scr.x, 4f * scr.y, 3 * scr.x, 1f * scr.y), selectedItem.Description + "\nValue " + selectedItem.Value + "\nAmount " + selectedItem.Amount);
 
+                if (GUI.Button(new Rect(11f * scr.x, 3.25f * scr.y, scr.x, 0.25f * scr.y),"Take Item"))
+                {
+                    //add to player
+                    LinearInventory.inv.Add(ItemData.CreateItem(selectedItem.ID));
+                    //remove from chest
+                    chestInv.Remove(selectedItem);
+                    selectedItem = null;
+                    return;
                 }
             }
             //display items in player inventory
