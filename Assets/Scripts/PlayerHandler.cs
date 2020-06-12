@@ -13,8 +13,9 @@ public class PlayerHandler : Character
     public CharacterController controller;
     public Vector3 moveDirection;
     [Header("Level Data")]
-    public int level = 0;
+    public int level = 1;
     public float currentExp, neededExp, maxExp;
+    public Quest quest;
     [Header("Damage Flash and Death")]
     public Image damageImage;
     public Image deathImage;
@@ -100,10 +101,21 @@ public class PlayerHandler : Character
     public override void Update()
     {
         base.Update();
+        if (currentExp >= maxExp)
+        {
+            level++;
+            currentExp -= maxExp;
+            maxExp += (int)(maxExp/2);
+            for (int i = 0; i < attributes.Length; i++)
+            {
+                attributes[i].maxValue += 10;
+
+            }
+        }
         #region bar update
         for (int i = 0; i < attributes.Length; i++)
         {
-            attributes[0].displayImage.fillAmount = Mathf.Clamp01(attributes[0].currentValue / attributes[0].maxValue);
+            attributes[i].displayImage.fillAmount = Mathf.Clamp01(attributes[i].currentValue / attributes[i].maxValue);
 
         }
         #endregion
@@ -185,9 +197,28 @@ public class PlayerHandler : Character
         }
     }
     #endregion
+    #region Quest
+    public void KilledCreature(string enemyTag)
+    {
+        if (quest.goal.questState == QuestState.Active)
+        { 
+                quest.goal.EnemyKilled(enemyTag);
+            
 
+        }
+    }
+    public void ItemCollected(int id)
+    {
+        if (quest.goal.questState == QuestState.Active)
+        {
+            quest.goal.ItemCollected(id);
+           
+
+        }
+    }
+    #endregion
     #region Death and Respawn
-    
+
     void Death()
     {
         //set death flag to dead

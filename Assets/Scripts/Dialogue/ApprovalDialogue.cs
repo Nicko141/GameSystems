@@ -26,12 +26,15 @@ public class ApprovalDialogue : MonoBehaviour
     public string response1, response2;
 
     public Shop myShop;
+    public QuestGiver myQuest;
 
     #endregion
     // Start is called before the first frame update
     void Start()
     {
+        //playerMouseLook = GameObject.FindGameObjectsWithTag("Player").GetComponent<PlayerHandler.MouseLook>();
         dialogueText = neuText;
+        myQuest = GetComponent<QuestGiver>();
     }
     private void OnGUI()
     {
@@ -75,7 +78,7 @@ public class ApprovalDialogue : MonoBehaviour
                     if (approval<1)
                     {
                         approval++;
-
+                        
                     }
                     
                 }
@@ -119,6 +122,12 @@ public class ApprovalDialogue : MonoBehaviour
                 LinearInventory.currentShop = myShop;
                 showDlg = false;
             }
+            if (GUI.Button(new Rect(10 * scr.x, 8.5f * scr.y, scr.x, 0.5f * scr.y), "Quest"))
+            {
+                myQuest.OpenQuestWindow();
+            }
+            
+
         }
     }
     // Update is called once per frame

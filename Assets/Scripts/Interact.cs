@@ -7,9 +7,14 @@ public class Interact : MonoBehaviour
     #region Variables
     //[Header("Player and Camera connection")]
     //create two gameobject variables one called player and the other mainCam
+    public PlayerHandler player;
 
     #endregion
     #region Start
+    private void Start()
+    {
+        player = GetComponent<PlayerHandler>();
+    }
     private void Update()
     {
         #region Update   
@@ -73,7 +78,10 @@ public class Interact : MonoBehaviour
                     ItemHandler handler = hitInfo.transform.GetComponent<ItemHandler>();
                     if (handler != null)
                     {
+                        player.quest.goal.ItemCollected(handler.itemId);
+
                         handler.OnCollection();
+                       
                     }
                 }
 
