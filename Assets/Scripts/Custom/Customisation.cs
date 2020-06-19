@@ -1,8 +1,10 @@
-﻿using JetBrains.Annotations;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 public class Customisation : Stats
 {
     #region Variables
@@ -13,13 +15,26 @@ public class Customisation : Stats
     public CharacterClass charClass = CharacterClass.Warrior;
     public string[] selectedClass = new string[5];
     public int selectedIndex = 0;
-
-    [Header("Dropdown Menu")]
-    public bool showDropdown;
-    public Vector2 scrollPos;
     public string classButton = "";
-    public int statPoints = 10;
 
+   
+    public int statPoints = 10;
+    [System.Serializable]
+    public struct PointUI
+    {
+        public Stats.StatBlock stat;
+        public Text nameDisplay;
+        public GameObject plusButton;
+        public GameObject minusButton;
+
+    };
+    public PointUI[] pointSystem;
+
+    public Text pointsText;
+    void TextUpdate()
+    {
+        pointsText.text = "Points: " + statPoints;
+    }
 
 
     [Header("Texture List")]
@@ -59,7 +74,17 @@ public class Customisation : Stats
         {
             characterStats[i].name = tempName[i];
         }
+        TextUpdate();
         chooseClass(0);
+
+        #region Stat setup
+        for (int i = 0; i < pointSystem.Length; i++)
+        {
+            pointSystem[i].nameDisplay.text = pointSystem[i].stat.name + ": " + (pointSystem[i].stat.value + pointSystem[i].stat.tempValue);
+
+            pointSystem[i].minusButton.SetActive(false);
+        }
+        #endregion
 
         #region for loop to pull textures from file
         #region Skin
@@ -131,6 +156,10 @@ public class Customisation : Stats
         #endregion
     }
     #endregion
+    public void SetName(string charName)
+    {
+        characterName = charName;
+    }
 
     #region SetTexture
     //create a function that is called SetTexture it should contain a string for type and int for direction
@@ -279,56 +308,107 @@ public class Customisation : Stats
     #endregion
     #endregion
 
-    void chooseClass(int classIndex)
+
+    public void chooseClass(int classIndex)
     {
         switch (classIndex)
         {
             case 0:
-                characterStats[0].value = 18;
-                characterStats[1].value = 12;
-                characterStats[2].value = 13;
-                characterStats[3].value = 6;
-                characterStats[4].value = 6;
-                characterStats[5].value = 5;
+                pointSystem[0].stat.value = 18;
+                pointSystem[1].stat.value = 12;
+                pointSystem[2].stat.value = 13;
+                pointSystem[3].stat.value = 6;
+                pointSystem[4].stat.value = 6;
+                pointSystem[5].stat.value = 5;
                 charClass = CharacterClass.Warrior;
                 break;
             case 1:
-                characterStats[0].value = 15;
-                characterStats[1].value = 5;
-                characterStats[2].value = 15;
-                characterStats[3].value = 9;
-                characterStats[4].value = 8;
-                characterStats[5].value = 8;
+                pointSystem[0].stat.value = 15;
+                pointSystem[1].stat.value = 5;
+                pointSystem[2].stat.value = 15;
+                pointSystem[3].stat.value = 9;
+                pointSystem[4].stat.value = 8;
+                pointSystem[5].stat.value = 8;
                 charClass = CharacterClass.Defender;
                 break;
             case 2:
-                characterStats[0].value = 7;
-                characterStats[1].value = 18;
-                characterStats[2].value = 8;
-                characterStats[3].value = 9;
-                characterStats[4].value = 10;
-                characterStats[5].value = 8;
+                pointSystem[0].stat.value = 7;
+                pointSystem[1].stat.value = 18;
+                pointSystem[2].stat.value = 8;
+                pointSystem[3].stat.value = 9;
+                pointSystem[4].stat.value = 10;
+                pointSystem[5].stat.value = 8;
                 charClass = CharacterClass.Archer;
                 break;
             case 3:
-                characterStats[0].value = 7;
-                characterStats[1].value = 10;
-                characterStats[2].value = 9;
-                characterStats[3].value = 12;
-                characterStats[4].value = 14;
-                characterStats[5].value = 8;
+                pointSystem[0].stat.value = 7;
+                pointSystem[1].stat.value = 10;
+                pointSystem[2].stat.value = 9;
+                pointSystem[3].stat.value = 12;
+                pointSystem[4].stat.value = 14;
+                pointSystem[5].stat.value = 8;
                 charClass = CharacterClass.Sorcerer;
                 break;
             case 4:
-                characterStats[0].value = 5;
-                characterStats[1].value = 7;
-                characterStats[2].value = 15;
-                characterStats[3].value = 12;
-                characterStats[4].value = 12;
-                characterStats[5].value = 9;
+                pointSystem[0].stat.value = 5;
+                pointSystem[1].stat.value = 7;
+                pointSystem[2].stat.value = 15;
+                pointSystem[3].stat.value = 12;
+                pointSystem[4].stat.value = 12;
+                pointSystem[5].stat.value = 9;
                 charClass = CharacterClass.Healer;
                 break;
         }
+        for (int i = 0; i < pointSystem.Length; i++)
+        {
+            pointSystem[i].stat.tempValue = 0;
+            statPoints = 10;
+            pointSystem[i].nameDisplay.text = pointSystem[i].stat.name + ": " + (pointSystem[i].stat.value + pointSystem[i].stat.tempValue);
+
+            pointSystem[i].minusButton.SetActive(false);
+            pointSystem[i].plusButton.SetActive(true);
+            TextUpdate();
+        }
+    }
+
+    public void SetPointsPos(int i)
+    {
+        statPoints--;
+        pointSystem[i].stat.tempValue++;
+
+        if (statPoints <= 0)
+        {
+            for (int button = 0; button < pointSystem.Length; button++)
+            {
+                pointSystem[button].plusButton.SetActive(false);
+            }
+        }
+        if (pointSystem[i].minusButton.activeSelf == false)
+        {
+            pointSystem[i].minusButton.SetActive(true);
+        }
+        pointSystem[i].nameDisplay.text = pointSystem[i].stat.name + ": " + (pointSystem[i].stat.value + pointSystem[i].stat.tempValue);
+        TextUpdate();
+    }
+    public void SetPointNeg(int i)
+    {
+        statPoints++;
+        pointSystem[i].stat.tempValue--;
+
+        if (pointSystem[i].stat.tempValue <= 0)
+        {
+            pointSystem[i].minusButton.SetActive(false);
+        }
+        if (pointSystem[i].plusButton.activeSelf == false)
+        {
+            for (int button = 0; button < pointSystem.Length; button++)
+            {
+                pointSystem[button].plusButton.SetActive(true);
+            }
+        }
+        pointSystem[i].nameDisplay.text = pointSystem[i].stat.name + ": " + (pointSystem[i].stat.value + pointSystem[i].stat.tempValue);
+        TextUpdate();
+
     }
     void SaveCharacter()
     {
@@ -347,7 +427,7 @@ public class Customisation : Stats
         }
         PlayerPrefs.SetString("CharacterClass", selectedClass[selectedIndex]);
     }
-    private void OnGUI()
+   /* private void OnGUI()
     {
         //create floats scrW and scrH that govern our 16:9 ratio
         Vector2 scr = new Vector2(Screen.width / 16, Screen.height / 9);
@@ -536,7 +616,7 @@ public class Customisation : Stats
         
         #endregion
     }
-
+    */
 }
 public enum CharacterClass
 {

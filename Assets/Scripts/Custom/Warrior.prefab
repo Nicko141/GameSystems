@@ -295,10 +295,51 @@ MonoBehaviour:
   - 
   - 
   selectedIndex: 0
-  showDropdown: 0
-  scrollPos: {x: 0, y: 0}
   classButton: Choose Class...
   statPoints: 10
+  pointSystem:
+  - stat:
+      name: Strength
+      value: 0
+      tempValue: 0
+    nameDisplay: {fileID: 0}
+    plusButton: {fileID: 0}
+    minusButton: {fileID: 0}
+  - stat:
+      name: Dexterity
+      value: 0
+      tempValue: 0
+    nameDisplay: {fileID: 0}
+    plusButton: {fileID: 0}
+    minusButton: {fileID: 0}
+  - stat:
+      name: Constitution
+      value: 0
+      tempValue: 0
+    nameDisplay: {fileID: 0}
+    plusButton: {fileID: 0}
+    minusButton: {fileID: 0}
+  - stat:
+      name: Wisdom
+      value: 0
+      tempValue: 0
+    nameDisplay: {fileID: 0}
+    plusButton: {fileID: 0}
+    minusButton: {fileID: 0}
+  - stat:
+      name: Intelligence
+      value: 0
+      tempValue: 0
+    nameDisplay: {fileID: 0}
+    plusButton: {fileID: 0}
+    minusButton: {fileID: 0}
+  - stat:
+      name: Charisma
+      value: 0
+      tempValue: 0
+    nameDisplay: {fileID: 0}
+    plusButton: {fileID: 0}
+    minusButton: {fileID: 0}
   skin: []
   hair: []
   mouth: []
