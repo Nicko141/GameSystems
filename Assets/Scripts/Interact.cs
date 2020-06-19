@@ -41,8 +41,7 @@ public class Interact : MonoBehaviour
                     if (hitInfo.collider.GetComponent<NPCDialogue>())
                     {
                         NPCDialogue character = hitInfo.collider.GetComponent<NPCDialogue>();
-                        dlgCont.characterNPCName = character.characterName;
-                        dlgCont.currentDialogue = character.dialogueText;
+                        CanvasDialogueController.currentNPC = character;
                         dlgCont.Dialogue();
                         dlgCont.dialoguePanel.SetActive(true);
                         Cursor.lockState = CursorLockMode.None;

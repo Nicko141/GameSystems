@@ -8,34 +8,73 @@ public class CanvasDialogueController : MonoBehaviour
 {
     public GameObject dialoguePanel;
     public string[] currentDialogue;
-    public string characterNPCName;
+    public static NPCDialogue currentNPC;
+    
     public MouseLook playerMouseLook;
     public Text dialogueText;
     public Text buttonText;
+    public GameObject button;
+    public GameObject acceptButton;
+    public GameObject refuseButton;
     public int index, optionIndex;
     
+
 
 
     void Start()
     {
         playerMouseLook = GameObject.FindGameObjectWithTag("Player").GetComponent<MouseLook>();
         
+
+    }
+    public void DlgApproval()
+    {
+        if (currentNPC.approval <= -1)
+        {
+            currentDialogue = currentNPC.negText;
+        }
+        if (currentNPC.approval == 0)
+        {
+            currentDialogue = currentNPC.neuText;
+        }
+
+        if (currentNPC.approval >= 1)
+        {
+            currentDialogue = currentNPC.posText;
+        }
+        dialogueText.text = currentNPC.characterName + ": " + currentDialogue[index];
     }
 
     public void Dialogue()
     {
-        dialogueText.text = characterNPCName + ": " + currentDialogue[index];
+        DlgApproval();
+        
         buttonText.text = "Next";
+        acceptButton.SetActive(false);
+        refuseButton.SetActive(false);
     }
     public void Buttons()
     {
-        if (!(index >= currentDialogue.Length - 1))
+        if (!(index >= currentDialogue.Length - 1 || index == optionIndex))
         {
+            button.SetActive(true);
+            acceptButton.SetActive(false);
+            refuseButton.SetActive(false);
             index++;
             if (index >= currentDialogue.Length -1)
             {
+                acceptButton.SetActive(false);
+                refuseButton.SetActive(false);
                 buttonText.text = "Bye";
+                
             }
+        }
+        else if (index == optionIndex)
+        {
+            index++;
+            button.SetActive(false);
+            acceptButton.SetActive(true);
+            refuseButton.SetActive(true);
         }
         else
         {
@@ -45,8 +84,34 @@ public class CanvasDialogueController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             dialoguePanel.SetActive(false);
+            acceptButton.SetActive(false);
+            refuseButton.SetActive(false);
+            currentNPC = null;
         }
-        dialogueText.text = characterNPCName + ": " + currentDialogue[index];
+        if (currentNPC != null)
+        {
+            DlgApproval();
+        }
+        
+      
     }
-   
+    public void Accept()
+    {
+        if (currentNPC.approval < 1)
+        {
+            currentNPC.approval++;
+
+        }
+    }
+    public void Refuse()
+    {
+        
+        if (currentNPC.approval > -1)
+        {
+            currentNPC.approval--;
+
+        }
+    }
+
+
 }
