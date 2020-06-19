@@ -8,6 +8,7 @@ public class Interact : MonoBehaviour
     //[Header("Player and Camera connection")]
     //create two gameobject variables one called player and the other mainCam
     public PlayerHandler player;
+    public CanvasDialogueController dlgCont;
 
     #endregion
     #region Start
@@ -37,9 +38,13 @@ public class Interact : MonoBehaviour
                     
                     //Debug that we hit a NPC   
                     Debug.Log("Talk to the NPC");
-                    if (hitInfo.collider.GetComponent<Dialogue>())
+                    if (hitInfo.collider.GetComponent<NPCDialogue>())
                     {
-                        hitInfo.collider.GetComponent<Dialogue>().showDlg = true;
+                        NPCDialogue character = hitInfo.collider.GetComponent<NPCDialogue>();
+                        dlgCont.characterNPCName = character.characterName;
+                        dlgCont.currentDialogue = character.dialogueText;
+                        dlgCont.Dialogue();
+                        dlgCont.dialoguePanel.SetActive(true);
                         Cursor.lockState = CursorLockMode.None;
                         Cursor.visible = true;
                         Camera.main.GetComponent<MouseLook>().enabled = false;
@@ -47,25 +52,7 @@ public class Interact : MonoBehaviour
 
                     }
 
-                    if (hitInfo.collider.GetComponent<OptionLinearDialogue>())
-                    {
-                        hitInfo.collider.GetComponent<OptionLinearDialogue>().showDlg = true;
-                        Cursor.lockState = CursorLockMode.None;
-                        Cursor.visible = true;
-                        Camera.main.GetComponent<MouseLook>().enabled = false;
-                        GetComponent<MouseLook>().enabled = false;
-
-                    }
-
-                    if (hitInfo.collider.GetComponent<ApprovalDialogue>())
-                    {
-                        hitInfo.collider.GetComponent<ApprovalDialogue>().showDlg = true;
-                        Cursor.lockState = CursorLockMode.None;
-                        Cursor.visible = true;
-                        Camera.main.GetComponent<MouseLook>().enabled = false;
-                        GetComponent<MouseLook>().enabled = false;
-
-                    }
+                    
                 }
                 #endregion
                 #region Item

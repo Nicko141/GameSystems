@@ -32,7 +32,7 @@ public class ApprovalDialogue : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //playerMouseLook = GameObject.FindGameObjectsWithTag("Player").GetComponent<PlayerHandler.MouseLook>();
+        playerMouseLook = GameObject.FindGameObjectWithTag("Player").GetComponent<MouseLook>();
         dialogueText = neuText;
         myQuest = GetComponent<QuestGiver>();
     }
