@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class LinearInventory : MonoBehaviour
+public class LinearInventory1 : MonoBehaviour
 {
     #region Variables
     public static List<Item> inv = new List<Item>();
