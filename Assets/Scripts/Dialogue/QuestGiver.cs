@@ -11,6 +11,7 @@ public class QuestGiver : MonoBehaviour
     public GameObject questWindow;
 
     public Text titleText, descriptionText, experienceText, goldText;
+    public Text activeTitleText, activeDescText;
    
 
     public void OpenQuestWindow()
@@ -26,6 +27,8 @@ public class QuestGiver : MonoBehaviour
         quest.goal.questState = QuestState.Active;
         questWindow.SetActive(false);
         player.quest = quest;
+        activeTitleText.text = quest.title;
+        activeDescText.text = quest.description;
     }
    
     public void Claimed()
@@ -33,6 +36,8 @@ public class QuestGiver : MonoBehaviour
         player.currentExp += quest.experienceReward;
         LinearInventory.money += quest.goldReward;
         quest.goal.questState = QuestState.Claimed;
+        activeTitleText.text = "";
+        activeDescText.text = "";
         Debug.Log("You Got " + quest.experienceReward + " EXP and $" + quest.goldReward);
     }
 

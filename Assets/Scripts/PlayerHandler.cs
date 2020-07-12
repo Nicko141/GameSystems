@@ -16,6 +16,7 @@ public class PlayerHandler : Character
     public int level = 1;
     public float currentExp, neededExp, maxExp;
     public Quest quest;
+   public Text titleText, descText;
     [Header("Damage Flash and Death")]
     public Image damageImage;
     public Image deathImage;
@@ -212,10 +213,11 @@ public class PlayerHandler : Character
         if (quest.goal.questState == QuestState.Active)
         {
             quest.goal.ItemCollected(id);
-           
+            
 
         }
     }
+   
     #endregion
     #region Death and Respawn
 

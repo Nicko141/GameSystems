@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class CanvasDialogueController : MonoBehaviour
 {
     public GameObject dialoguePanel;
+    public GameObject completePanel;
     public string[] currentDialogue;
     public static NPCDialogue currentNPC;
     

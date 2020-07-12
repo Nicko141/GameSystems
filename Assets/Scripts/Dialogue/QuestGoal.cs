@@ -13,8 +13,9 @@ public class QuestGoal
     public int requiredAmount;
     public int currentAmount;
     public bool isReached;
+    public CanvasDialogueController dlgCont;
 
-    
+
     public void EnemyKilled(string type)
     {
         if (goalType == GoalType.Kill && type == enemyType)
@@ -23,6 +24,7 @@ public class QuestGoal
             if (currentAmount >= requiredAmount)
             {
                 isReached = true;
+                dlgCont.completePanel.SetActive(true);
                 questState = QuestState.Complete;
                 Debug.Log("Quest Complete");
             }
@@ -37,7 +39,9 @@ public class QuestGoal
             if (currentAmount >= requiredAmount)
             {
                 isReached = true;
+                dlgCont.completePanel.SetActive(true);
                 questState = QuestState.Complete;
+
                 Debug.Log("Quest Complete");
             }
         }
