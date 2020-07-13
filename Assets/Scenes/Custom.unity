@@ -3199,69 +3199,14 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8296172668007359106}
-        m_MethodName: reset
-        m_Mode: 5
+        m_MethodName: SetTextureReset
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8296172668007359105}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8296172668007359105}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8296172668007359105}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Armour
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &696246134
@@ -9741,19 +9686,13 @@ PrefabInstance:
       objectReference: {fileID: 1965276510}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15952acaa678f3f40ba3c462113c9c49, type: 3}
---- !u!1 &8296172668007359105 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3336311506618394641, guid: 15952acaa678f3f40ba3c462113c9c49,
-    type: 3}
-  m_PrefabInstance: {fileID: 6732064186407029392}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8296172668007359106 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3336311506618394642, guid: 15952acaa678f3f40ba3c462113c9c49,
     type: 3}
   m_PrefabInstance: {fileID: 6732064186407029392}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8296172668007359105}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e0cd77a7d312b141949da0ea87f3203, type: 3}

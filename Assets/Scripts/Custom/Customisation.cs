@@ -304,6 +304,10 @@ public class Customisation : Stats
         SetTexture(type, -1);
      
     }
+    public void SetTextureReset(string type)
+    {
+        
+    }
     #endregion
     #endregion
     #endregion
