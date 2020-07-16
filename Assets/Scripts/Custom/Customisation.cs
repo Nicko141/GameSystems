@@ -414,7 +414,7 @@ public class Customisation : Stats
         TextUpdate();
 
     }
-    void SaveCharacter()
+    public void SaveCharacter()
     {
         PlayerPrefs.SetInt("SkinIndex", skinIndex);
         PlayerPrefs.SetInt("HairIndex", hairIndex);
@@ -430,6 +430,8 @@ public class Customisation : Stats
             PlayerPrefs.SetInt(characterStats[i].name, (characterStats[i].value + characterStats[i].tempValue));
         }
         PlayerPrefs.SetString("CharacterClass", selectedClass[selectedIndex]);
+
+        SceneManager.LoadScene(2);
     }
    /* private void OnGUI()
     {
