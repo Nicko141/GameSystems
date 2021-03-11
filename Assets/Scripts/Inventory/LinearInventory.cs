@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LinearInventory : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class LinearInventory : MonoBehaviour
     {
         public string slotName;
         public Transform equipLocation;
-        public GameObject currentItem;
+        public GameObject currentItem, inventoryMenu;
     };
     public Equipment[] equipmentSlots;
 
@@ -55,6 +56,7 @@ public class LinearInventory : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Tab))
             {
                 showInv = !showInv;
+                
                 if (showInv)
                 {
                     Time.timeScale = 0;

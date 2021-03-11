@@ -31,7 +31,7 @@ public static class ItemData
                 break;
             case 1:
                 _name = "Meat";
-                _description = "For all your plant negative needs";
+                _description = "Top tier Vegan repellant!";
                 _value = 10;
                 _amount = 1;
                 _icon = "Food/Meat";
@@ -144,7 +144,7 @@ public static class ItemData
                 break;
             case 208:
                 _name = "Cloak";
-                _description = "Where the dagger?";
+                _description = "Where's the dagger?";
                 _value = 50;
                 _amount = 1;
                 _icon = "Apparel/cloaks";
