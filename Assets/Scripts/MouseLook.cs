@@ -27,6 +27,7 @@ public class MouseLook : MonoBehaviour
         {
             axis = RotationalAxis.MouseY;
         }
+        sensitivity = 400f;
     }
 
     void Update()
