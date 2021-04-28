@@ -5,7 +5,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerHandler : Character
 {
-    
+
 
     #region Variables
     [Header("Physics")]
@@ -16,7 +16,7 @@ public class PlayerHandler : Character
     public int level = 1;
     public float currentExp, neededExp, maxExp;
     public Quest quest;
-   public Text titleText, descText;
+    public Text titleText, descText;
     [Header("Damage Flash and Death")]
     public Image damageImage;
     public Image deathImage;
@@ -29,16 +29,19 @@ public class PlayerHandler : Character
     public float flashSpeed = 5f;
     public static bool isDead;
     public bool isDamaged;
+    public bool isRunning;
     public bool canHeal;
+    public bool canBreathe;
     public float healDelayTimer;
+    public float breatheDelayTimer;
     #endregion
     #region Behaviour
 
-   
+
     private void Start()
     {
         controller = this.gameObject.GetComponent<CharacterController>();
-        if (KeyBindManager.keys.Count <1)
+        if (KeyBindManager.keys.Count < 1)
         {
             KeyBindManager.keys.Add("Forward", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Forward", "W")));
             KeyBindManager.keys.Add("Backward", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Backward", "S")));
@@ -51,7 +54,7 @@ public class PlayerHandler : Character
             KeyBindManager.keys.Add("Interact", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Interact", "E")));
             KeyBindManager.keys.Add("Inventory", (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Inventory", "Tab")));
         }
-        
+
     }
     public override void Movement()
     {
@@ -89,6 +92,7 @@ public class PlayerHandler : Character
             if (Input.GetKey(KeyBindManager.keys["Sprint"]))
             {
                 moveDirection *= sprint;
+                Running();
             }
             if (Input.GetKey(KeyBindManager.keys["Crouch"]))
             {
@@ -106,7 +110,7 @@ public class PlayerHandler : Character
         {
             level++;
             currentExp -= maxExp;
-            maxExp += (int)(maxExp/2);
+            maxExp += (int)(maxExp / 2);
             for (int i = 0; i < attributes.Length; i++)
             {
                 attributes[i].maxValue += 10;
@@ -121,34 +125,54 @@ public class PlayerHandler : Character
         }
         #endregion
 #if UNITY_EDITOR
-        if(Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             damagePlayer(5);
         }
 #endif
         #region Damage Flash
-        if(isDamaged && !isDead)
+        if (isDamaged && !isDead)
         {
             damageImage.color = flashColour;
             isDamaged = false;
         }
-        else if(damageImage.color.a >0)
+        else if (damageImage.color.a > 0)
         {
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
         #endregion
-        if(!canHeal)
+        if (!canHeal)
         {
             healDelayTimer += Time.deltaTime;
-            if(healDelayTimer >= 5)
+            if (healDelayTimer >= 5)
             {
                 canHeal = true;
             }
-            
+
         }
-        if(canHeal && attributes[0].currentValue < attributes[0].maxValue && attributes[0].currentValue >0)
+        if (canHeal && attributes[0].currentValue < attributes[0].maxValue && attributes[0].currentValue > 0)
         {
             regenHealth();
+            
+        }
+        if (!canBreathe)
+        {
+            breatheDelayTimer += Time.deltaTime;
+            if (breatheDelayTimer >= 5)
+            {
+                canBreathe = true;
+            }
+
+        }
+        if (canHeal && attributes[0].currentValue < attributes[0].maxValue && attributes[0].currentValue > 0)
+        {
+            regenHealth();
+
+        }
+        if (canBreathe && attributes[1].currentValue < attributes[1].maxValue)
+        {
+            regenStamina();
+
         }
         /*if (attributes[0].currentValue > attributes[0].maxValue)
         {
@@ -170,10 +194,33 @@ public class PlayerHandler : Character
             Death();
         }
     }
+    public void Running()
+    {
+        isRunning = true;
+
+        attributes[1].currentValue -= 5 * Time.deltaTime;
+
+        canBreathe = false;
+        breatheDelayTimer = 0;
+        if (attributes[1].currentValue <= 0)
+        {
+            sprint = 1;
+            attributes[1].currentValue = 0;
+        }
+        else
+        {
+            sprint = 2;     
+        }
+    }
     public void regenHealth()
     {
         attributes[0].currentValue += Time.deltaTime *(attributes[0].regenValue/*plus our vitality value*/);
         
+    }
+    public void regenStamina()
+    {
+        attributes[1].currentValue += Time.deltaTime * (attributes[1].regenValue);
+
     }
     public void OnTriggerEnter(Collider other)
     {
