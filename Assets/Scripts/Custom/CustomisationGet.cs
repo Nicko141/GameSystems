@@ -31,6 +31,8 @@ public class CustomisationGet : MonoBehaviour
         }
         player.name = PlayerPrefs.GetString("CharacterName");
         player.gameObject.name = player.name;
+        player.charClass = PlayerPrefs.GetString("CharacterClass");
+        player.charRace = PlayerPrefs.GetString("CharacterRace");
 
         SetTexture("Skin", PlayerPrefs.GetInt("SkinIndex"));
         SetTexture("Hair", PlayerPrefs.GetInt("HairIndex"));

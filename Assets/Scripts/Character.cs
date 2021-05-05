@@ -7,6 +7,8 @@ public class Character : Stats
     #region
     [Header("Character Data")]
     public new string name;
+    public string charClass;
+    public string charRace;
     [Header("Movement Variables")]
     public float speed = 5f;
     public float crouch = 2.5f;

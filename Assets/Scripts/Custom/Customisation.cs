@@ -11,12 +11,15 @@ public class Customisation : Stats
     [Header("Character Name")]
     //name of character
     public string characterName;
+    public string characterClass;
+    public string characterRace;
     [Header("Character Class")]
     public CharacterClass charClass = CharacterClass.Warrior;
     public CharacterRace charRace = CharacterRace.Human;
     public string[] selectedClass = new string[5];
     public string[] selectedRace = new string[5];
-    public int selectedIndex = 0;
+    public int selectedClassIndex = 0;
+    public int selectedRaceIndex = 0;
     public string classButton = "";
     public Text classAbility;
     public Text raceAbility;
@@ -334,6 +337,7 @@ public class Customisation : Stats
                 pointSystem[5].stat.value = 5;
                 classAbility.text = "Lion's Heart";
                 charClass = CharacterClass.Warrior;
+                selectedClassIndex = 0;
                 break;
             case 1:
                 pointSystem[0].stat.value = 15;
@@ -344,6 +348,7 @@ public class Customisation : Stats
                 pointSystem[5].stat.value = 8;
                 classAbility.text = "Last Stand";
                 charClass = CharacterClass.Defender;
+                selectedClassIndex = 1;
                 break;
             case 2:
                 pointSystem[0].stat.value = 7;
@@ -354,6 +359,7 @@ public class Customisation : Stats
                 pointSystem[5].stat.value = 8;
                 classAbility.text = "Dead Shot";
                 charClass = CharacterClass.Archer;
+                selectedClassIndex = 2;
                 break;
             case 3:
                 pointSystem[0].stat.value = 7;
@@ -364,6 +370,7 @@ public class Customisation : Stats
                 pointSystem[5].stat.value = 8;
                 classAbility.text = "Magic Overload";
                 charClass = CharacterClass.Sorcerer;
+                selectedClassIndex = 3;
                 break;
             case 4:
                 pointSystem[0].stat.value = 5;
@@ -374,6 +381,7 @@ public class Customisation : Stats
                 pointSystem[5].stat.value = 9;
                 classAbility.text = "Heal the World";
                 charClass = CharacterClass.Healer;
+                selectedClassIndex = 4;
                 break;
         }
         for (int i = 0; i < pointSystem.Length; i++)
@@ -396,41 +404,38 @@ public class Customisation : Stats
             case 0:
                 raceAbility.text = "Adaption";
                 charRace = CharacterRace.Human;
+                selectedRaceIndex = 0;
                 break;
             case 1:
                 
                 raceAbility.text = "Light as Air";
                 charRace = CharacterRace.Elf;
+                selectedRaceIndex = 1;
                 break;
             case 2:
                 
                 raceAbility.text = "Earthern Expert";
                 charRace = CharacterRace.Dwarf;
+                selectedRaceIndex = 2;
                 break;
             case 3:
                 
                 raceAbility.text = "Shadow's Agent";
                 charRace = CharacterRace.DarkElf;
+                selectedRaceIndex = 3;
                 break;
             case 4:
                
                 raceAbility.text = "Beastial Instinct";
                 charRace = CharacterRace.Beastman;
+                selectedRaceIndex = 4;
                 break;
         }
         
     }
     #endregion
-    #region Abilities
-    public void ClassAbility()
-    {
-
-    }
-    public void RaceAbility()
-    {
-
-    }
-    #endregion
+    
+    
     #region Set Points
     public void SetPointsPos(int i)
     {
@@ -487,8 +492,8 @@ public class Customisation : Stats
         {
             PlayerPrefs.SetInt(characterStats[i].name, (characterStats[i].value + characterStats[i].tempValue));
         }
-        PlayerPrefs.SetString("CharacterClass", selectedClass[selectedIndex]);
-
+        PlayerPrefs.SetString("CharacterClass", selectedClass[selectedClassIndex]);
+        PlayerPrefs.SetString("CharacterRace", selectedRace[selectedRaceIndex]);
         SceneManager.LoadScene(2);
     }
     #region OnGUI data
