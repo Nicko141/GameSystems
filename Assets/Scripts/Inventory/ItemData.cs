@@ -229,7 +229,7 @@ public static class ItemData
             #endregion
             default:
                 itemID = 0;
-                _name = "apple";
+                _name = "Apple";
                 _description = "Munchies and Crunchies";
                 _value = 1;
                 _amount = 1;
@@ -250,7 +250,7 @@ public static class ItemData
             Damage = _damage,
             Armour = _armour,
             Type = _type,
-            Icon = Resources.Load("Icons/"+_icon)as Texture2D,
+            Icon = Resources.Load<Sprite>("Icons/"+_icon),
             Mesh = Resources.Load("Mesh/"+_mesh) as GameObject
         };
         return temp;

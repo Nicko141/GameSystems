@@ -11,7 +11,7 @@ public class Item
     private int _heal;
     private int _damage;
     private int _armour;
-    private Texture2D _icon;
+    private Sprite _icon;
     private GameObject _mesh;
     private ItemType _type;
     #endregion
@@ -57,7 +57,7 @@ public class Item
         get { return _armour; }
         set { _armour = value; }
     }
-    public Texture2D Icon
+    public Sprite Icon
     {
         get { return _icon; }
         set { _icon = value; }

@@ -20,7 +20,7 @@ public class ItemHandler : MonoBehaviour
         }
         else if (itemType == ItemType.Weapon || itemType == ItemType.Apparel || itemType == ItemType.Quest)//weapon, apparrel, quest
         {
-            LinearInventory.inv.Add(ItemData.CreateItem(itemId));
+            LinearInventory.playerInventory.AddItemToInventory(ItemData.CreateItem(itemId));
         }
         else/*Food,Potion,Crafting,Ingredients,Scrolls,*/
         {
@@ -41,7 +41,7 @@ public class ItemHandler : MonoBehaviour
             }
             else
             {
-                LinearInventory.inv.Add(ItemData.CreateItem(itemId));
+                LinearInventory.playerInventory.AddItemToInventory(ItemData.CreateItem(itemId));
                 for (int i = 0; i < LinearInventory.inv.Count; i++)
                 {
                   if (itemId == LinearInventory.inv[i].ID)
