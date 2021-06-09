@@ -336,7 +336,7 @@ public class LinearInventory : MonoBehaviour
     }
     public void sortWeapons()
     {
-        sortType = "Weapons";
+        sortType = "Weapon";
         UpdateInventory();
     }
     public void sortApparel()
@@ -356,7 +356,7 @@ public class LinearInventory : MonoBehaviour
     }
     public void sortPotions()
     {
-        sortType = "Potions";
+        sortType = "Potion";
         UpdateInventory();
     }
     public void sortScrolls()
@@ -387,11 +387,13 @@ public class LinearInventory : MonoBehaviour
                         if (selectedItem.Amount > 1)
                         {
                             selectedItem.Amount--;
+                        UpdateInventory();
                         }
                         else
                         {
                             inv.Remove(selectedItem);
                             selectedItem = null;
+                        UpdateInventory();
                             return;
                         }
                     
