@@ -124,12 +124,12 @@ public class PlayerHandler : Character
 
         }
         #endregion
-#if UNITY_EDITOR
+
         if (Input.GetKeyDown(KeyCode.X))
         {
             damagePlayer(5);
         }
-#endif
+
         #region Damage Flash
         if (isDamaged && !isDead)
         {
